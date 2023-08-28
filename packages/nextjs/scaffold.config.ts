@@ -1,3 +1,4 @@
+import { Chain } from "wagmi";
 import * as chains from "wagmi/chains";
 
 export type ScaffoldConfig = {
@@ -9,9 +10,25 @@ export type ScaffoldConfig = {
   walletAutoConnect: boolean;
 };
 
+// Tried to add this in the network.ts file but failed doesn't work when importing it
+export const bgChainL2 = {
+  id: 42069,
+  name: "BuidlGuidl L2",
+  network: "bgChainL2",
+  nativeCurrency: {
+    symbol: "ETH",
+    name: "Ether",
+    decimals: 18,
+  },
+  rpcUrls: {
+    public: { http: ["https://rpc.l2.buidlguidl.com"] },
+    default: { http: ["https://rpc.l2.buidlguidl.com"] },
+  },
+} as const satisfies Chain;
+
 const scaffoldConfig = {
   // The network where your DApp lives in
-  targetNetwork: chains.hardhat,
+  targetNetwork: bgChainL2,
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect on the local network
