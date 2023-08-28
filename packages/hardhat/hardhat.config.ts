@@ -47,7 +47,7 @@ const config: HardhatUserConfig = {
       url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
     },
-    // Using the https://rpc.l2.buidlguidl.com/ endpoint doesn't work (some misconception on the certificate)
+    // Using the https://rpc.l2.buidlguidl.com/ endpoint doesn't work (some misconfiguration on the cert)
     bgChainL2: {
       url: `http://143.244.144.169:8545`,
       accounts: [deployerPrivateKey],
