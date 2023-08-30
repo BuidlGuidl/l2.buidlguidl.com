@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { QRCodeSVG } from "qrcode.react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { useDisconnect, useSwitchNetwork } from "wagmi";
+import { mainnet, useDisconnect, useSwitchNetwork } from "wagmi";
 import {
   ArrowLeftOnRectangleIcon,
   ArrowTopRightOnSquareIcon,
@@ -14,6 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Address, Balance, BlockieAvatar } from "~~/components/scaffold-eth";
 import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-eth";
+import { enabledChains } from "~~/services/web3/wagmiConnectors";
 import { getBlockExplorerAddressLink, getTargetNetwork } from "~~/utils/scaffold-eth";
 
 /**
@@ -22,7 +23,6 @@ import { getBlockExplorerAddressLink, getTargetNetwork } from "~~/utils/scaffold
 export const RainbowKitCustomConnectButton = () => {
   useAutoConnect();
   const networkColor = useNetworkColor();
-  const configuredNetwork = getTargetNetwork();
   const { disconnect } = useDisconnect();
   const { switchNetwork } = useSwitchNetwork();
   const [addressCopied, setAddressCopied] = useState(false);
@@ -46,7 +46,7 @@ export const RainbowKitCustomConnectButton = () => {
                 );
               }
 
-              if (chain.unsupported || chain.id !== configuredNetwork.id) {
+              if (chain.unsupported) {
                 return (
                   <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-error btn-sm dropdown-toggle gap-1">
@@ -57,18 +57,22 @@ export const RainbowKitCustomConnectButton = () => {
                       tabIndex={0}
                       className="dropdown-content menu p-2 mt-1 shadow-center shadow-accent bg-base-200 rounded-box gap-1"
                     >
-                      <li>
-                        <button
-                          className="btn-sm !rounded-xl flex py-3 gap-3"
-                          type="button"
-                          onClick={() => switchNetwork?.(configuredNetwork.id)}
-                        >
-                          <ArrowsRightLeftIcon className="h-6 w-4 ml-2 sm:ml-0" />
-                          <span className="whitespace-nowrap">
-                            Switch to <span style={{ color: networkColor }}>{configuredNetwork.name}</span>
-                          </span>
-                        </button>
-                      </li>
+                      {enabledChains
+                        .filter(chain => chain.id !== mainnet.id)
+                        .map(chain => (
+                          <li key={chain.id}>
+                            <button
+                              className="btn-sm !rounded-xl flex py-3 gap-3"
+                              type="button"
+                              onClick={() => switchNetwork?.(chain.id)}
+                            >
+                              <ArrowsRightLeftIcon className="h-6 w-4 ml-2 sm:ml-0" />
+                              <span className="whitespace-nowrap">
+                                Switch to <span style={{ color: networkColor }}>{chain.name}</span>
+                              </span>
+                            </button>
+                          </li>
+                        ))}
                       <li>
                         <button
                           className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3"
