@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { QRCodeSVG } from "qrcode.react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { mainnet, useDisconnect, useSwitchNetwork } from "wagmi";
+import { mainnet, sepolia, useDisconnect, useSwitchNetwork } from "wagmi";
 import {
   ArrowLeftOnRectangleIcon,
   ArrowTopRightOnSquareIcon,
@@ -14,6 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Address, Balance, BlockieAvatar } from "~~/components/scaffold-eth";
 import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-eth";
+import { bgChainL2 } from "~~/scaffold.config";
 import { enabledChains } from "~~/services/web3/wagmiConnectors";
 import { getBlockExplorerAddressLink, getTargetNetwork } from "~~/utils/scaffold-eth";
 
@@ -108,6 +109,18 @@ export const RainbowKitCustomConnectButton = () => {
                       tabIndex={0}
                       className="dropdown-content menu z-[2] p-2 mt-2 shadow-center shadow-accent bg-base-200 rounded-box gap-1"
                     >
+                      <li>
+                        <button
+                          className="btn-sm !rounded-xl flex py-3 gap-3"
+                          type="button"
+                          onClick={() => switchNetwork?.(chain.id === sepolia.id ? bgChainL2.id : sepolia.id)}
+                        >
+                          <ArrowsRightLeftIcon className="h-6 w-4 ml-2 sm:ml-0" />
+                          <span className="whitespace-nowrap">
+                            Switch to {chain.id === sepolia.id ? bgChainL2.name : sepolia.name}
+                          </span>
+                        </button>
+                      </li>
                       <li>
                         {addressCopied ? (
                           <div className="btn-sm !rounded-xl flex gap-3 py-3">

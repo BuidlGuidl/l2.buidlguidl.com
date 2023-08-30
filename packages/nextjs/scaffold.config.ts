@@ -24,6 +24,10 @@ export const bgChainL2 = {
     public: { http: ["https://rpc.l2.buidlguidl.com"] },
     default: { http: ["https://rpc.l2.buidlguidl.com"] },
   },
+  blockExplorers: {
+    etherscan: { name: "BG L2 Explorer", url: "https://explorer.l2.buidlguidl.com" },
+    default: { name: "BG L2 Explorer", url: "https://explorer.l2.buidlguidl.com" },
+  },
 } as const satisfies Chain;
 
 const scaffoldConfig = {

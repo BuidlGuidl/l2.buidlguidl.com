@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
+import BridgeToBGChain from "~~/components/bgChain/BridgeToBGChain";
 
 const Home: NextPage = () => {
   return (
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
             <span className="block text-4xl font-bold">BuidlGuidl L2</span>
           </h1>
           <p className="text-center text-lg">L2 Tesnet (powered by the OP stack) for the BuidlGuidl.</p>
+          <BridgeToBGChain />
         </div>
       </div>
     </>

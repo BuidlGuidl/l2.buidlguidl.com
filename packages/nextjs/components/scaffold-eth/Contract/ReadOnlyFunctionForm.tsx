@@ -9,7 +9,7 @@ import {
   getInitialFormState,
   getParsedContractFunctionArgs,
 } from "~~/components/scaffold-eth";
-import { notification } from "~~/utils/scaffold-eth";
+import { getTargetNetwork, notification } from "~~/utils/scaffold-eth";
 
 type TReadOnlyFunctionFormProps = {
   contractAddress: Address;
@@ -25,6 +25,7 @@ export const ReadOnlyFunctionForm = ({ contractAddress, abiFunction }: TReadOnly
     functionName: abiFunction.name,
     abi: [abiFunction] as Abi,
     args: getParsedContractFunctionArgs(form),
+    chainId: getTargetNetwork().id,
     enabled: false,
     onError: (error: any) => {
       notification.error(error.message);

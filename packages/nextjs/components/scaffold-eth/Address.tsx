@@ -3,7 +3,7 @@ import Link from "next/link";
 import Blockies from "react-blockies";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { isAddress } from "viem";
-import { useEnsAvatar, useEnsName } from "wagmi";
+import { Chain, useEnsAvatar, useEnsName } from "wagmi";
 import { hardhat } from "wagmi/chains";
 import { CheckCircleIcon, DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 import { getBlockExplorerAddressLink, getTargetNetwork } from "~~/utils/scaffold-eth";
@@ -13,6 +13,7 @@ type TAddressProps = {
   disableAddressLink?: boolean;
   format?: "short" | "long";
   size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
+  chain?: Chain;
 };
 
 const blockieSizeMap = {
@@ -28,7 +29,7 @@ const blockieSizeMap = {
 /**
  * Displays an address (or ENS) with a Blockie image and option to copy address.
  */
-export const Address = ({ address, disableAddressLink, format, size = "base" }: TAddressProps) => {
+export const Address = ({ address, disableAddressLink, format, size = "base", chain }: TAddressProps) => {
   const [ens, setEns] = useState<string | null>();
   const [ensAvatar, setEnsAvatar] = useState<string | null>();
   const [addressCopied, setAddressCopied] = useState(false);
@@ -66,7 +67,7 @@ export const Address = ({ address, disableAddressLink, format, size = "base" }: 
     return <span className="text-error">Wrong address</span>;
   }
 
-  const blockExplorerAddressLink = getBlockExplorerAddressLink(getTargetNetwork(), address);
+  const blockExplorerAddressLink = getBlockExplorerAddressLink(chain ? chain : getTargetNetwork(), address);
   let displayAddress = address?.slice(0, 5) + "..." + address?.slice(-4);
 
   if (ens) {
