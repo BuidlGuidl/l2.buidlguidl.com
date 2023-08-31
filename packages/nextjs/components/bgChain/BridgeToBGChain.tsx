@@ -65,7 +65,7 @@ const BridgeToBGChain = () => {
         <div className="flex flex-col space-y-3">
           <InputBase placeholder="Amount to bridge" value={sendValue} onChange={value => setSendValue(value)} />
           {isConnected && connectedChain && connectedChain.id === sepolia.id ? (
-            <button className="h-10 btn btn-secondary btn-sm px-2 rounded-full" onClick={sendETH} disabled={loading}>
+            <button className="h-10 btn btn-accent btn-sm px-2 rounded-full" onClick={sendETH} disabled={loading}>
               {!loading ? (
                 <BanknotesIcon className="h-6 w-6" />
               ) : (
@@ -75,7 +75,7 @@ const BridgeToBGChain = () => {
             </button>
           ) : connectedChain ? (
             <button
-              className="h-10 btn btn-secondary btn-sm px-2 rounded-full"
+              className="h-10 btn btn-accent btn-sm px-2 rounded-full"
               type="button"
               onClick={() => switchNetwork?.(sepolia.id)}
             >
@@ -88,7 +88,7 @@ const BridgeToBGChain = () => {
             <button
               onClick={openConnectModal}
               disabled={isConnecting}
-              className="h-10 btn btn-secondary btn-sm px-2 rounded-full"
+              className="h-10 btn btn-accent btn-sm px-2 rounded-full"
             >
               {isConnecting && <span className="loading loading-spinner loading-sm"></span>}
               <span>Connect Wallet</span>
