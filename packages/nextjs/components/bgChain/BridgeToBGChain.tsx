@@ -38,7 +38,6 @@ const BridgeToBGChain = () => {
       setSendValue("");
     } catch (error) {
       const parsedError = getParsedError(error);
-      console.error("⚡️ ~ file: BridgeToBGChain.tsx:sendETH ~ error", error);
       notification.error(parsedError);
       setLoading(false);
     }
