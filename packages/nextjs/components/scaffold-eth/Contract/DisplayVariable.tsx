@@ -5,7 +5,7 @@ import { useContractRead } from "wagmi";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { displayTxResult } from "~~/components/scaffold-eth";
 import { useAnimationConfig } from "~~/hooks/scaffold-eth";
-import { notification } from "~~/utils/scaffold-eth";
+import { getTargetNetwork, notification } from "~~/utils/scaffold-eth";
 
 type DisplayVariableProps = {
   contractAddress: Address;
@@ -22,6 +22,7 @@ export const DisplayVariable = ({ contractAddress, abiFunction, refreshDisplayVa
     address: contractAddress,
     functionName: abiFunction.name,
     abi: [abiFunction] as Abi,
+    chainId: getTargetNetwork().id,
     onError: error => {
       notification.error(error.message);
     },
