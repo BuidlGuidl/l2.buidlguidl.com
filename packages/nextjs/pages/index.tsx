@@ -7,7 +7,7 @@ const Home: NextPage = () => {
     <>
       <MetaHeader />
       <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
+        <div className="px-4">
           <h1 className="text-center mb-8">
             <span className="block text-4xl font-bold">BuidlGuidl L2</span>
           </h1>

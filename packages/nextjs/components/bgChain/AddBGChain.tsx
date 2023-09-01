@@ -43,7 +43,7 @@ const AddBGChain = () => {
   };
 
   return (
-    <div className="bg-base-300 p-6 rounded-xl space-y-4 m-6">
+    <div className="bg-base-300 p-6 rounded-xl space-y-4">
       <h3 className="text-xl font-bold mb-3 text-center">BG L2 Chain</h3>
       <div className="space-y-3">
         <div className="flex flex-row justify-between">
