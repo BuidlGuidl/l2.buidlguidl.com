@@ -43,8 +43,7 @@ const BridgeToBGChain = () => {
     }
   };
   return (
-    <div className="bg-base-300 p-6 rounded-xl space-y-4">
-      <h3 className="text-xl font-bold mb-3 text-center">Bridge Sepolia ETH to BG L2 Chain</h3>
+    <div className="bg-base-300 p-6 rounded-xl space-y-4 max-w-md m-auto">
       <div className="space-y-3">
         <div className="flex flex-col items-center space-y-5">
           <div className="flex flex-col items-center space-y-2">
