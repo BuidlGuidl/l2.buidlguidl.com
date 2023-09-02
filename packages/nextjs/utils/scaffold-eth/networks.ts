@@ -60,6 +60,12 @@ export const NETWORKS_EXTRA_DATA: Record<string, TChainAttributes> = {
  * @dev returns empty string if the network is localChain
  */
 export function getBlockExplorerTxLink(chainId: number, txnHash: string) {
+  const targetNetwork = getTargetNetwork();
+
+  if (targetNetwork.id === chainId && targetNetwork.blockExplorers?.default.url) {
+    return `${targetNetwork.blockExplorers.default.url}/tx/${txnHash}`;
+  }
+
   const chainNames = Object.keys(chains);
 
   const targetChainArr = chainNames.filter(chainName => {
